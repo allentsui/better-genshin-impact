@@ -47,7 +47,7 @@ namespace BetterGenshinImpact.GameTask.AutoDomain;
 
 public class AutoDomainTask : ISoloTask<Dictionary<string, int>>
 {
-    public string Name => "自动秘境";
+    public string Name => "自动";
 
     private readonly AutoDomainParam _taskParam;
 
@@ -92,7 +92,7 @@ public class AutoDomainTask : ISoloTask<Dictionary<string, int>>
         if (_taskParam.CombatStrategyPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
         {
             _jsonCombatStrategyPath = _taskParam.CombatStrategyPath;
-            Logger.LogInformation("自动秘境：检测到JSON策略文件，将使用JSON战斗引擎");
+            Logger.LogInformation("自动：检测到JSON策略文件，将使用JSON战斗引擎");
         }
         else
         {
@@ -634,7 +634,7 @@ public class AutoDomainTask : ISoloTask<Dictionary<string, int>>
             using var leftBottom = CaptureToRectArea();
             var leftBottomOcr = leftBottom.Find(RecognitionAssets.Get("AutoFight", "AbnormalIcon", leftBottom));
             return leftBottomOcr.IsExist();
-        }, _ct, 20, 500);
+        }, _ct, 1, 500);
         if (!leftBottomFound)
         {
             //尝试随意点击一下右下角
